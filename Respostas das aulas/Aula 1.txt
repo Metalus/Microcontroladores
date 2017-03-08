@@ -1,0 +1,15 @@
+Pergunta: O que são sistemas embarcados?
+R: Sistemas com um hardware e software dedicados a uma operação exclusiva.
+
+Pergunta: O que são sistemas microprocessados?
+R: Processamento, armazenamento e controle realizados por um ou mais microprocessador(es)
+
+Aplicações de sistemas embarcados:
+ -> Indústria automotiva: Airbag, câmbio automático, injeção eletrônica.
+ -> Eletrodomésticos: Geladeira com controle de temperatura e tempo de operação, Micro-ondas, Forno, SmartTv.
+ -> Automação industrial: Controle de estoque, peso do produto, avaliação de funcionamento.
+ -> Arquitetura: x86, x64 (32 bits e 64 bits, respectivamente), ARMv7 (arquitetura muito utilizada em dispositivos móveis como aparelhos celulares Android).
+ 
+ Pergunta: Por que usar o MSP430 e não outro microcontrolador?
+ R: Preço baixo, desempenho aceitável para aplicações gerais considerando projetos de aprendizado, uso de linguagem C e Assembly, ambos baixo nível, muitas funções.
+ 

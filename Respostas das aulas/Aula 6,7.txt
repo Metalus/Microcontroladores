@@ -8,7 +8,13 @@ Para cada questão, escreva funções em C e/ou sub-rotinas na linguagem Assembl
  
 O protótipo da função é:
 
-	unsigned int Raiz_Quadrada(unsigned int S);
+	float Raiz_Quadrada(unsigned int S)
+	{
+		float x = 1;
+		for (int i = 0; i < 50; i++)
+			x = (x + S / x) / 2;
+		return x;
+	}
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável 'S' é fornecida pelo registrador R15, e a raiz quadrada de 'S' (ou seja, a variável 'x') é fornecida pelo registrador R15 também.
 
@@ -60,6 +66,33 @@ O protótipo da função é:
 7. (a) Escreva uma função em C que calcula a função exponencial da seguinte forma:
 	
 Considere o cálculo até o termo n = 20. O protótipo da função é double ExpTaylor(double x);
+
+		unsigned long Fatorial(unsigned long N)
+		{
+			if (N < 2) return 1;
+			return N*Fatorial(N - 1);
+		}
+
+		double power(double x, int N)
+		{
+			double retn = 1;
+			if (N == 0) return retn;
+
+			for(int i = 0; i < N;i++)
+				retn *= x;
+
+			return retn;
+		}
+
+		double ExpTaylor(double x)
+		{
+			double v = 1;
+			for(int i = 1; i <= 20; i++)
+				v += power(x, i) / Fatorial(i);
+
+			return v;
+		}
+
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430, mas considere que os valores de entrada e de saída são inteiros de 16 bits. A variável de entrada é fornecida pelo registrador R15, e o valor de saída também.
 
 8. Escreva uma sub-rotina na linguagem Assembly do MSP430 que indica se um vetor esta ordenado de forma decrescente. Por exemplo:
@@ -71,11 +104,20 @@ O primeiro endereço do vetor é fornecido pelo registrador R15, e o tamanho do 
 	
 O primeiro endereço do vetor 'a' deverá ser passado através do registrador R15, o primeiro endereço do vetor 'b' deverá ser passado através do registrador R14, e o tamanho do vetor deverá ser passado pelo registrador R13. A saída deverá ser fornecida no registrador R15.
 
+
+Prod_escalar	
+
 10. (a) Escreva uma função em C que indica se um vetor é palíndromo. Por exemplo:
 	[1 2 3 2 1] e [0 10 20 20 10 0] são palíndromos.
 	[5 4 3 2 1] e [1 2 3 2] não são.
 Se o vetor for palíndromo, retorne o valor 1. Caso contrário, retorne o valor 0. O protótipo da função é:
-
-	int Palindromo(int vetor[ ], int tamanho);
+	
+	int Palindromo(int vetor[], int tamanho)
+	{
+		for (int i = 0; i < tamanho >> 1; i++)
+			if (vetor[i] != vetor[tamanho - i - 1]) return 0;
+		return 1;
+	}
+	
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. O endereço do vetor de entrada é dado pelo registrador R15, o tamanho do vetor é dado pelo registrador R14, e o resultado é dado pelo registrador R15.

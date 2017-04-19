@@ -1,0 +1,10 @@
+MULT_signed:
+tst.w R14
+jge MULT_signed_else
+inv.w R15
+inc.w R15
+inv.w R14
+inc.w R14
+MULT_signed_else:
+call #Mult_unsigned
+ret

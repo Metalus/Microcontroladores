@@ -92,7 +92,7 @@ end_sqrt    mov.w R14,R15
 			inc R13
 			jmp for_resto
 	End_for_resto: 	mov R13,R15
-			ret
+					ret
 
 5. (a) Escreva uma função em C que indica a primalidade de uma variável inteira sem sinal, retornando o valor 1 se o número for primo, e 0, caso contrário. Siga o seguinte protótipo:
 
@@ -110,7 +110,7 @@ end_sqrt    mov.w R14,R15
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável de entrada é fornecida pelo registrador R15, e o valor de saída também.
 
 Primalidade: 	mov.w #1,R14	; R14 é o valor do índice (i = 1).
-				mov.w #0,R12	; R12 é o registrador que conta as vezes que o resto é zero.
+		mov.w #0,R12	; R12 é o registrador que conta as vezes que o resto é zero.
 looping:     	push.w R15		; Joga o valor de R15 (Número analisado) para a pilha para usar a função #CalculaRST.
 		call #CalculaRST
 		inc.w R14		; i++ 
@@ -181,13 +181,13 @@ Fatorial:
 			mov.w #2, R14		;	i = 2 (R14)
 For_Fat:		cmp R14, R13		;	N >= i 
 			jge End_for_fat
-			push R13		; 	N na stack
+			push R13			; 	N na stack
 			call #Mult_unsigned	;	Multiplicação R15*=R14 -> Fat*=i
 			pop R13
 			inc.w R14
 			jmp For_Fat
 Fatorial_1:		mov.w #1, R15
-End_for_fat:	ret
+End_for_fat:		ret
 
 
 
@@ -199,18 +199,18 @@ O primeiro endereço do vetor é fornecido pelo registrador R15, e o tamanho do 
 Decrescente:
 		mov.w #0, R13		; i = 0
 		mov.w R15, R12		; aux = &R15
-		dec.w R14		; N--
+		dec.w R14			; N--
                 push R4
 Decresc_for:	cmp R14, R13		; i < N
-		jeq FimLoop		; Fim se i == N
+		jeq FimLoopDecresc	; Fim se i == N
                 mov.w R13, R4		; temp = i
-                rla R4              	; temp = 2*i
+                rla R4              ; temp = 2*i
 		add.w R4, R12		; aux = &R15 + 2*i
 		cmp 0(R12),2(R12)	; cmp R[0] e R[1]
 		jge NDecres
 		inc.w R13
 		jmp Decresc_for
-FimLoop:	mov.w #1, R15		; É decrescente
+FimLoopDecresc:	mov.w #1, R15		; É decrescente
                 pop R4
                 ret
 NDecres:	mov.w #0, R15		; Não é decrescente
@@ -222,8 +222,42 @@ NDecres:	mov.w #0, R15		; Não é decrescente
 	
 O primeiro endereço do vetor 'a' deverá ser passado através do registrador R15, o primeiro endereço do vetor 'b' deverá ser passado através do registrador R14, e o tamanho do vetor deverá ser passado pelo registrador R13. A saída deverá ser fornecida no registrador R15.
 
-
-Prod_escalar	
+Prod_escalar:
+		push R4
+		push R5
+		push R6
+		push R7				; R7 = Produto escalar
+		push R11			; tempA = deve receber &a + 2*i 
+		push R10			; tempB = deve receber &b + 2*i
+		mov.w R15, R5		; R5 = &a
+		mov.w R14, R4		; R4 = &b
+		mov.w R13, R6		; R6 = n (Total de elementos)
+		mov.w #0, R12		; i = 0
+		clr R7				; Prod_escalar = 0 - Começa com 0
+Prod_for:	cmp R6, R12			; cmp n, i-2
+		jeq FimProdFor
+		push R12
+		mov.w R12, R11		; tempA = i
+		mov.w R12, R10		; tempB = i-2
+		rla R11				; tempA = 2*i
+		rla R10				; tempB = 2*i
+		add.w R5, R11		; tempA = &a + 2*i
+		add.w R4, R10		; tempB = &b + 2*i
+		mov.w 0(R11), R15	; R15 = a[i]
+		mov.w 0(R10), R14	; R14 = b[i]
+		call #Mult_unsigned	; a[i] = a[i]*b[i]
+		add.w R15, R7		; Prod_escalar += a[i]*b[i]
+                pop R12
+		inc.w R12			; i++
+		jmp Prod_for
+FimProdFor:	mov.w R7, R15
+		pop R10
+		pop R11
+		pop R7
+		pop R6
+		pop R5
+		pop R4
+		ret
 
 10. (a) Escreva uma função em C que indica se um vetor é palíndromo. Por exemplo:
 	[1 2 3 2 1] e [0 10 20 20 10 0] são palíndromos.

@@ -18,6 +18,25 @@ O protótipo da função é:
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável 'S' é fornecida pelo registrador R15, e a raiz quadrada de 'S' (ou seja, a variável 'x') é fornecida pelo registrador R15 também.
 
+sqrt:
+            mov.w #1, R14		; x = 1
+            mov.w #0, R13		; i = 0
+            mov.w R15,R12		; R12 = S
+for_sqrt    cmp #50, R13		; i < 50
+            jeq end_sqrt        ; Pular para o fim do loop
+            mov.w R12,R15		; R15 = S -> Pegar sempre o valor de S e não alterá-lo a cada iteração
+            push R13            ; R13 na stack
+            call #Div_unsigned	; R15 = R15 / R14 -> S/x
+            add R15, R14		; x = x+S/x
+            rra R14     		; R14 / 2
+            pop R13             ; Recuperar R13
+            inc.w R13			; i++
+            jmp for_sqrt
+end_sqrt    mov.w R14,R15
+            ret
+		
+		
+
 2. (a) Escreva uma função em C que calcule 'x' elevado à 'N'-ésima potência, seguindo o seguinte protótipo: 
 
 	int Potencia(int x, int N)
@@ -31,25 +50,83 @@ O protótipo da função é:
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. 'x' e 'n' são fornecidos através dos registradores R15 e R14, respectivamente, e a saída deverá ser fornecida no registrador R15.
 
-3. Escreva uma sub-rotina na linguagem Assembly do MSP430 que calcula a divisão de 'a' por 'b', onde 'a', 'b' e o valor de saída são inteiros de 16 bits. 'a' e 'b' são fornecidos através dos registradores R15 e R14, respectivamente, e a saída deverá ser fornecida através do registrador R15.
+	Potencia:
+                        cmp #0, R14		; N == 0
+                        jeq Potencia_1
+                        mov.w #0, R12		; i = 0
+                        dec.w R14		; N--
+                        mov.w R15, R13          ; R13 = X
+	loop_potencia:	cmp R14, R12		; i < N-1
+                        jeq Fim_potencia	; Pular se i == N-1
+                        push R14
+                        push R12
+                        push R13
+                        mov.w R13, R14		; R14 = x
+                        call #Mult_unsigned	; R15 = R15*x
+                        pop R13
+                        pop R12
+                        pop R14
+                        inc.w R12	        ; i++
+                        jmp loop_potencia
+	Potencia_1:     mov.w #1, R15
+	Fim_potencia:	ret
 
+3. Escreva uma sub-rotina na linguagem Assembly do MSP430 que calcula a divisão de 'a' por 'b', onde 'a', 'b' e o valor de saída são inteiros de 16 bits. 'a' e 'b' são fornecidos através dos registradores R15 e R14, respectivamente, e a saída deverá ser fornecida através do registrador R15.
+	Div_unsigned:
+			clr R13;
+	for_div		cmp R14,R15
+			jl End_for_div
+			sub R14,R15
+			inc R13
+			jmp for_div
+	End_for_div: 	mov R13,R15
+					ret
 
 4. Escreva uma sub-rotina na linguagem Assembly do MSP430 que calcula o resto da divisão de 'a' por 'b', onde 'a', 'b' e o valor de saída são inteiros de 16 bits. 'a' e 'b' são fornecidos através dos registradores R15 e R14, respectivamente, e a saída deverá ser fornecida através do registrador R15.
+
+	Resto_unsigned:
+			clr R13;
+	for_resto	cmp R14,R15
+			jl End_for_resto
+			sub R14,R15
+			inc R13
+			jmp for_resto
+	End_for_resto: 	mov R13,R15
+			ret
 
 5. (a) Escreva uma função em C que indica a primalidade de uma variável inteira sem sinal, retornando o valor 1 se o número for primo, e 0, caso contrário. Siga o seguinte protótipo:
 
 	int Primalidade(unsigned int x)
 	{
 		if(x<2) return 0;
-		for(int i = 2;; i++)
+		for(int i = 2; i <= x; i++)
 		{
 			if(x % i == 0 && x != i)
-				return 1;
+				return 0;
 		}
-		return 0;
+		return 1;
 	}
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável de entrada é fornecida pelo registrador R15, e o valor de saída também.
+
+Primalidade: 	mov.w #1,R14	; R14 é o valor do índice (i = 1).
+				mov.w #0,R12	; R12 é o registrador que conta as vezes que o resto é zero.
+looping:     	push.w R15		; Joga o valor de R15 (Número analisado) para a pilha para usar a função #CalculaRST.
+		call #CalculaRST
+		inc.w R14		; i++ 
+		cmp #0,R15		; R15, como é resultado da função CalculaRST, indica o resto da divisão de R15/R14. 
+		jne Condition	; if(R15 == 0) -> R12 ++ //indica se o resto é zero.
+		inc.w R12		;	 R12 ++ ;
+Condition:   	pop R15;	; Resgata o valor de R15, que é o número a ser analisado.
+		cmp.w R14,R15	; Quando i = R15, então a análise terminou.
+		jn FIM
+		jmp looping	; FOR ...
+FIM:        	cmp #2,R12         ; if(R12 == 2){ 
+		jeq true		; 	R15 = 1;
+		mov.w #0,R15	; }else{
+		jmp false		;	R15 = 0;
+true:	     	mov.w #1,R15	;      }
+false:	     	ret  
 
 6. Escreva uma função em C que calcula o duplo fatorial de n, representado por n!!. Se n for ímpar, n!! = 1*3*5*...*n, e se n for par, n!! = 2*4*6*...*n. Por exemplo, 9!! = 1*3*5*7*9 = 945 e 10!! = 2*4*6*8*10 = 3840. Além disso, 0!! = 1!! = 1.
 O protótipo da função é:
@@ -60,45 +137,86 @@ O protótipo da função é:
 		unsigned long long retn = 1;
 		for(unsigned long long i = n; i >= 2; i=i-2)
 			retn *= i;
-		
+		return retn;
 	}
 
 7. (a) Escreva uma função em C que calcula a função exponencial da seguinte forma:
 	
 Considere o cálculo até o termo n = 20. O protótipo da função é double ExpTaylor(double x);
 
-		unsigned long Fatorial(unsigned long N)
-		{
-			if (N < 2) return 1;
-			return N*Fatorial(N - 1);
-		}
+	unsigned long Fatorial(unsigned long N)
+	{
+		if (N < 2) return 1;
+		unsigned long Fat = 1;
+		for(int i = 2; i <= N;i++)
+			Fat *= i;
+		return Fat;
+	}
 
-		double power(double x, int N)
-		{
-			double retn = 1;
-			if (N == 0) return retn;
+	double power(double x, int N)
+	{
+		double retn = 1;
+		if (N == 0) return retn;
 
-			for(int i = 0; i < N;i++)
-				retn *= x;
+		for(int i = 0; i < N;i++)
+			retn *= x;
 
-			return retn;
-		}
+		return retn;
+	}
 
-		double ExpTaylor(double x)
-		{
-			double v = 1;
-			for(int i = 1; i <= 20; i++)
-				v += power(x, i) / Fatorial(i);
-
-			return v;
-		}
+	double ExpTaylor(double x)
+	{
+		double v = 1;
+		for(int i = 1; i <= 20; i++)
+			v += power(x, i) / Fatorial(i);
+		return v;
+	}
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430, mas considere que os valores de entrada e de saída são inteiros de 16 bits. A variável de entrada é fornecida pelo registrador R15, e o valor de saída também.
+
+Fatorial:
+			cmp #2,R15
+			jl Fatorial_1		; 	N < 2 ? ret 1 : continua
+			mov.w R15, R13		;	R13 = N
+			mov.w #2, R14		;	i = 2 (R14)
+For_Fat:		cmp R14, R13		;	N >= i 
+			jge End_for_fat
+			push R13		; 	N na stack
+			call #Mult_unsigned	;	Multiplicação R15*=R14 -> Fat*=i
+			pop R13
+			inc.w R14
+			jmp For_Fat
+Fatorial_1:		mov.w #1, R15
+End_for_fat:	ret
+
+
 
 8. Escreva uma sub-rotina na linguagem Assembly do MSP430 que indica se um vetor esta ordenado de forma decrescente. Por exemplo:
 [5 4 3 2 1] e [90 23 20 10] estão ordenados de forma decrescente.
 [1 2 3 4 5] e [1 2 3 2] não estão.
 O primeiro endereço do vetor é fornecido pelo registrador R15, e o tamanho do vetor é fornecido pelo registrador R14. A saída deverá ser fornecida no registrador R15, valendo 1 quando o vetor estiver ordenado de forma decrescente, e valendo 0 em caso contrário.
+
+Decrescente:
+		mov.w #0, R13		; i = 0
+		mov.w R15, R12		; aux = &R15
+		dec.w R14		; N--
+                push R4
+Decresc_for:	cmp R14, R13		; i < N
+		jeq FimLoop		; Fim se i == N
+                mov.w R13, R4		; temp = i
+                rla R4              	; temp = 2*i
+		add.w R4, R12		; aux = &R15 + 2*i
+		cmp 0(R12),2(R12)	; cmp R[0] e R[1]
+		jge NDecres
+		inc.w R13
+		jmp Decresc_for
+FimLoop:	mov.w #1, R15		; É decrescente
+                pop R4
+                ret
+NDecres:	mov.w #0, R15		; Não é decrescente
+                pop R4
+                ret
+				
 
 9. Escreva uma sub-rotina na linguagem Assembly do MSP430 que calcula o produto escalar de dois vetores, 'a' e 'b':
 	

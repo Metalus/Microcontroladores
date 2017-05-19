@@ -1,0 +1,32 @@
+#define CHPX1 BIT0
+#define CHPX2 BIT1
+#define CHPX3 BIT2
+#define CHPXS (CHPX1 + CHPX2 + CHPX3)
+
+void charlie_on(char CHPX_OUT, char CHPX_ON)
+{
+	P1OUT &= ~CHPXS;
+	P1DIR &= ~ CHPXS;
+	P1DIR |= CHPX_OUT;
+	P1OUT |= CHPX_ON;
+}
+
+int main(void)
+{
+  char out[] = {  CHPX1 + CHPX2,
+		  CHPX2 + CHPX3,
+		  CHPX2 + CHPX3,
+		  CHPX1 + CHPX3,
+		  CHPX1 + CHPX };
+  char ons[] = { CHPX1, CHPX2,
+		 CHPX2, CHPX3,
+		 CHPX1, CHPX3 };
+  char e;
+  WDTCTL = WDTPW | WDTHOLD;
+  while(1)
+  {
+	for(e=0; e<6; e++)
+		charlie_on(outs[e], ons[e]);
+  }
+  return 0;
+}

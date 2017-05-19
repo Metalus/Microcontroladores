@@ -17,9 +17,7 @@ void Atraso(volatile unsigned int x)
 		i++;
 	}
 
-	if(TAIFG)
-		
-	// Continua depois do atraso de x milissegundos.
+	TA0CTL=MC_0;
 	
 }
 
@@ -95,7 +93,7 @@ interrupt(TIMER0_A1_VECTOR) TA0_ISR(void)
 void paralelo_para_serial(void)
 {
 	int paralelo = P1IN & 0x0F;
-	P2OUT |= 0x1;	// Inicio
+	P2OUT |= 0x1;			// Inicio
 	for(int j = 0; j < 8; j++)
 	{
 		int value = paralelo & (1 << j) == (1 << j);

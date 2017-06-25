@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8554BCE0-58D0-44DA-B1A9-87F3C6C8D077}</ProjectGuid>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectName>Micro_IoT</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>
+    </PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>
+    </PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\libraries;$(ProjectDir)..\hardware\energia\msp430\libraries;$(ProjectDir)..\hardware\energia\msp430\cores\msp430;$(ProjectDir)..\hardware\energia\msp430\cores\msp430\avr;$(ProjectDir)..\hardware\energia\msp430\variants\MSP-EXP430G2553LP;$(ProjectDir)..\Micro_IoT;$(ProjectDir)..\hardware\tools\msp430\lib\gcc\msp430\4.6.3\include;$(ProjectDir)..\hardware\tools\msp430\msp430\include;$(ProjectDir)..\hardware\tools\msp430\msp430\include\sys;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.Micro_IoT.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>__MSP430_MSp430g2553__;__MSP430_MSP430G2553__;F_CPU=16000000L;ARDUINO=10610;ENERGIA=10610;ENERGIA_ARCH_MSP430;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\libraries;$(ProjectDir)..\hardware\energia\msp430\libraries;$(ProjectDir)..\hardware\energia\msp430\cores\msp430;$(ProjectDir)..\hardware\energia\msp430\cores\msp430\avr;$(ProjectDir)..\hardware\energia\msp430\variants\MSP-EXP430G2553LP;$(ProjectDir)..\Micro_IoT;$(ProjectDir)..\hardware\tools\msp430\lib\gcc\msp430\4.6.3\include;$(ProjectDir)..\hardware\tools\msp430\msp430\include;$(ProjectDir)..\hardware\tools\msp430\msp430\include\sys;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.Micro_IoT.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>__MSP430_MSp430g2553__;__MSP430_MSP430G2553__;F_CPU=16000000L;ARDUINO=10610;ENERGIA=10610;ENERGIA_ARCH_MSP430;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="VisualMicro" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Micro_IoT.ino">
+      <FileType>CppCode</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BasicsFuncs.h" />
+    <ClInclude Include="Rc522.h" />
+    <ClInclude Include="Serial_SPI.h" />
+    <ClInclude Include="Serial_UART.h" />
+    <ClInclude Include="__vm\.Micro_IoT.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BasicsFuncs.cpp" />
+    <ClCompile Include="Rc522.cpp" />
+    <ClCompile Include="Serial_SPI.cpp" />
+    <ClCompile Include="Serial_UART.cpp" />
+  </ItemGroup>
+  <PropertyGroup>
+    <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.maximum_size="16384" arduino.upload.speed="" visualmicro.package.name="energia" arduino.board.property_bag="vid.0=0x2341&#xD;&#xA;pid.0=0x0c9f&#xD;&#xA;name=MSP-EXP430G2553LP&#xD;&#xA;build.mcu=msp430g2553&#xD;&#xA;build.f_cpu=16000000L&#xD;&#xA;build.core=msp430&#xD;&#xA;build.variant=MSP-EXP430G2553LP&#xD;&#xA;build.board=MSP-EXP430G2553LP&#xD;&#xA;upload.tool=mspdebug&#xD;&#xA;upload.protocol=tilib&#xD;&#xA;upload.maximum_size=16384&#xD;&#xA;upload.maximum_data_size=512&#xD;&#xA;runtime.ide.path=D:\Energia&#xD;&#xA;runtime.os=windows&#xD;&#xA;build.system.path=D:\Energia\hardware\energia\msp430\system&#xD;&#xA;runtime.ide.version=10610&#xD;&#xA;target_package=energia&#xD;&#xA;target_platform=msp430&#xD;&#xA;runtime.hardware.path=D:\Energia\hardware\energia&#xD;&#xA;originalid=MSP-EXP430G2553LP&#xD;&#xA;vm.debug.build.extra_flags=VM_DEBUG_EXCLUDE_TYPE_FLOAT&#xD;&#xA;debug.tool=gdb&#xD;&#xA;debug.tools.gdb.pre_init.cmd=mspdebug&#xD;&#xA;debug.tools.gdb.pre_init.path={runtime.ide.path}/hardware/tools/msp430/mspdebug/&#xD;&#xA;debug.tools.gdb.pre_init.pattern=&quot;{path}/{cmd}&quot; tilib gdb&quot;&#xD;&#xA;debug.tools.gdb.start.cmd=msp430-gdb&#xD;&#xA;debug.tools.gdb.start.path={runtime.ide.path}/hardware/tools/msp430/bin/&#xD;&#xA;debug.tools.gdb.start.pattern=&quot;{path}/{cmd}&quot; &quot;{build.path}/{build.project_name}.elf&quot;&#xD;&#xA;intellisense.tools.path={runtime.ide.path}/hardware/tools&#xD;&#xA;intellisense.include.paths={intellisense.tools.path}\msp430\lib\gcc\msp430\4.6.3\include;{intellisense.tools.path}\msp430\msp430\include;{intellisense.tools.path}\msp430\msp430\include\sys&#xD;&#xA;version=1.0.1&#xD;&#xA;compiler.warning_flags=-w&#xD;&#xA;compiler.warning_flags.none=-w&#xD;&#xA;compiler.warning_flags.default=&#xD;&#xA;compiler.warning_flags.more=-Wall&#xD;&#xA;compiler.warning_flags.all=-Wall -Wextra&#xD;&#xA;compiler.mlarge_flag=&#xD;&#xA;compiler.path={runtime.tools.msp430-gcc.path}/bin/&#xD;&#xA;compiler.c.cmd=msp430-gcc&#xD;&#xA;compiler.c.flags=-c -g -O2 {compiler.mlarge_flag} {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD&#xD;&#xA;compiler.c.elf.flags={compiler.warning_flags} -g -O2 {compiler.mlarge_flag} -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main&#xD;&#xA;compiler.c.elf.cmd=msp430-gcc&#xD;&#xA;compiler.S.flags=-c -x assembler-with-cpp&#xD;&#xA;compiler.cpp.cmd=msp430-g++&#xD;&#xA;compiler.cpp.flags=-c -g -O2 {compiler.mlarge_flag} {compiler.warning_flags} -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD&#xD;&#xA;compiler.ar.cmd=msp430-ar&#xD;&#xA;compiler.ar.flags=rcs&#xD;&#xA;compiler.objcopy.cmd=msp430-objcopy&#xD;&#xA;compiler.objcopy.eep.flags=-O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0&#xD;&#xA;compiler.elf2hex.flags=-O ihex -R .eeprom&#xD;&#xA;compiler.elf2hex.cmd=msp430-objcopy&#xD;&#xA;compiler.ldflags=&#xD;&#xA;compiler.size.cmd=msp430-size&#xD;&#xA;build.extra_flags=&#xD;&#xA;compiler.c.extra_flags=-I{runtime.tools.msp430-gcc.path}/include&#xD;&#xA;compiler.c.elf.extra_flags=-L{runtime.tools.msp430-gcc.path}/include&#xD;&#xA;compiler.S.extra_flags=&#xD;&#xA;compiler.cpp.extra_flags=-I{runtime.tools.msp430-gcc.path}/include&#xD;&#xA;compiler.ar.extra_flags=&#xD;&#xA;compiler.objcopy.eep.extra_flags=&#xD;&#xA;compiler.elf2hex.extra_flags=&#xD;&#xA;recipe.c.o.pattern=&quot;{compiler.path}{compiler.c.cmd}&quot; {compiler.c.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DENERGIA={runtime.ide.version} -DENERGIA_{build.board} -DENERGIA_ARCH_{build.arch} {compiler.c.extra_flags} {build.extra_flags} {includes} &quot;{source_file}&quot; -o &quot;{object_file}&quot;&#xD;&#xA;recipe.cpp.o.pattern=&quot;{compiler.path}{compiler.cpp.cmd}&quot; {compiler.cpp.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DENERGIA={runtime.ide.version} -DENERGIA_{build.board} -DENERGIA_ARCH_{build.arch} {compiler.cpp.extra_flags} {build.extra_flags} {includes} &quot;{source_file}&quot; -o &quot;{object_file}&quot;&#xD;&#xA;recipe.S.o.pattern=&quot;{compiler.path}{compiler.c.cmd}&quot; {compiler.S.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DENERGIA={runtime.ide.version} -DENERGIA_{build.board} -DENERGIA_ARCH_{build.arch} {compiler.S.extra_flags} {build.extra_flags} {includes} &quot;{source_file}&quot; -o &quot;{object_file}&quot;&#xD;&#xA;recipe.ar.pattern=&quot;{compiler.path}{compiler.ar.cmd}&quot; {compiler.ar.flags} {compiler.ar.extra_flags} &quot;{archive_file_path}&quot; &quot;{object_file}&quot;&#xD;&#xA;recipe.c.combine.pattern=&quot;{compiler.path}{compiler.c.elf.cmd}&quot; {compiler.c.elf.flags} -mmcu={build.mcu} {compiler.c.elf.extra_flags} -o &quot;{build.path}/{build.project_name}.elf&quot; {object_files} &quot;{build.path}/{archive_file}&quot; &quot;-L{build.path}&quot; -lm&#xD;&#xA;recipe.objcopy.eep.pattern=&quot;{compiler.path}{compiler.objcopy.cmd}&quot; {compiler.objcopy.eep.flags} {compiler.objcopy.eep.extra_flags} &quot;{build.path}/{build.project_name}.elf&quot; &quot;{build.path}/{build.project_name}.eep&quot;&#xD;&#xA;recipe.objcopy.hex.pattern=&quot;{compiler.path}{compiler.elf2hex.cmd}&quot; {compiler.elf2hex.flags} {compiler.elf2hex.extra_flags} &quot;{build.path}/{build.project_name}.elf&quot; &quot;{build.path}/{build.project_name}.hex&quot;&#xD;&#xA;recipe.output.tmp_file={build.project_name}.hex&#xD;&#xA;recipe.output.save_file={build.project_name}.{build.variant}.hex&#xD;&#xA;recipe.size.pattern=&quot;{compiler.path}{compiler.size.cmd}&quot; -A &quot;{build.path}/{build.project_name}.elf&quot;&#xD;&#xA;recipe.size.regex=^(?:\.text|\.data|\.bootloader)\s+([0-9]+).*&#xD;&#xA;recipe.size.regex.data=^(?:\.data|\.bss|\.noinit)\s+([0-9]+).*&#xD;&#xA;recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*&#xD;&#xA;preproc.includes.flags=-w -x c++ -M -MG -MP&#xD;&#xA;recipe.preproc.includes=&quot;{compiler.path}{compiler.cpp.cmd}&quot; {compiler.cpp.flags} {preproc.includes.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DENERGIA={runtime.ide.version} -DENERGIA_{build.board} -DENERGIA_ARCH_{build.arch} {compiler.cpp.extra_flags} {build.extra_flags} {includes} &quot;{source_file}&quot;&#xD;&#xA;preproc.macros.flags=-w -x c++ -E -CC&#xD;&#xA;recipe.preproc.macros=&quot;{compiler.path}{compiler.cpp.cmd}&quot; {compiler.cpp.flags} {preproc.macros.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DENERGIA={runtime.ide.version} -DENERGIA_{build.board} -DENERGIA_ARCH_{build.arch} {compiler.cpp.extra_flags} {build.extra_flags} {includes} &quot;{source_file}&quot; -o &quot;{preprocessed_file_path}&quot;&#xD;&#xA;tools.dslite.upload.params.verbose=&#xD;&#xA;tools.dslite.upload.params.quiet=&#xD;&#xA;tools.dslite.path={runtime.tools.dslite.path}&#xD;&#xA;tools.dslite.config.path={path}&#xD;&#xA;tools.dslite.cmd.path={path}/DebugServer/bin/DSLite&#xD;&#xA;tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c &quot;{config.path}/{build.variant}.ccxml&quot; -f &quot;{build.path}/{build.project_name}.elf&quot;&#xD;&#xA;tools.mspdebug.upload.params.verbose=&#xD;&#xA;tools.mspdebug.upload.params.quiet=&#xD;&#xA;tools.mspdebug.path={runtime.tools.mspdebug.path}&#xD;&#xA;tools.mspdebug.cmd.path={path}/bin/mspdebug&#xD;&#xA;tools.mspdebug.upload.pattern={cmd.path} {upload.verbose} {upload.protocol} --force-reset &quot;prog {build.path}/{build.project_name}.hex&quot;&#xD;&#xA;vm.platform.root.path=D:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\Extensions\02oghilb.30b\Micro Platforms\energia16x&#xD;&#xA;rf2500.name=rf2500&#xD;&#xA;rf2500.protocol=rf2500&#xD;&#xA;dslite.name=dslite&#xD;&#xA;dslite.protocol=dslite&#xD;&#xA;runtime.tools.msp430-gcc.path=D:\Energia\hardware\tools\msp430&#xD;&#xA;runtime.tools.msp430-gcc-4.6.3.path=D:\Energia\hardware\tools\msp430&#xD;&#xA;runtime.tools.tools-msp430.path=D:\Energia\hardware\tools\msp430&#xD;&#xA;runtime.tools.dslite.path=D:\Energia\hardware\tools\DSLite&#xD;&#xA;runtime.tools.dslite-6.2.1.1594.path=D:\Energia\hardware\tools\DSLite&#xD;&#xA;runtime.tools.tools-DSLite.path=D:\Energia\hardware\tools\DSLite&#xD;&#xA;runtime.tools.mspdebug.path=D:\Energia\hardware\tools\msp430&#xD;&#xA;runtime.tools.mspdebug-0.22.path=D:\Energia\hardware\tools\msp430&#xD;&#xA;runtime.vm.boardinfo.id=energia_MSP-EXP430G2553LP&#xD;&#xA;runtime.vm.boardinfo.name=energia_MSP-EXP430G2553LP&#xD;&#xA;runtime.vm.boardinfo.desc=MSP-EXP430G2553LP&#xD;&#xA;runtime.vm.boardinfo.src_location=D:\Energia\hardware\energia\msp430&#xD;&#xA;ide.hint=For all Engeria platforms that use Board Manager&#xD;&#xA;ide.location.key=energia16x&#xD;&#xA;ide.location.ide.winreg=Energia 1.6.x Application&#xD;&#xA;ide.location.sketchbook.winreg=Energia 1.6.x Sketchbook&#xD;&#xA;ide.location.sketchbook.preferences=sketchbook.path&#xD;&#xA;ide.default.revision_name=1.6.10&#xD;&#xA;ide.default.version=10610&#xD;&#xA;ide.default.package=energia&#xD;&#xA;ide.default.platform=msp430&#xD;&#xA;ide.multiplatform=true&#xD;&#xA;ide.includes=arduino.h&#xD;&#xA;ide.exe_name=arduino&#xD;&#xA;ide.platformswithoutpackage=false&#xD;&#xA;ide.includes.fallback=wprogram.h&#xD;&#xA;ide.extension=ino&#xD;&#xA;ide.extension.fallback=pde&#xD;&#xA;ide.versionGTEQ=160&#xD;&#xA;ide.exe=arduino.exe&#xD;&#xA;ide.url=http://arduino.cc/en/Main/Software&#xD;&#xA;ide.help.reference.path=reference&#xD;&#xA;ide.help.reference.path2=reference\www.arduino.cc\en\Reference&#xD;&#xA;ide.help.reference.serial=reference\www.arduino.cc\en\Serial&#xD;&#xA;vm.debug=true&#xD;&#xA;software=ARDUINO&#xD;&#xA;ssh.user.name=root&#xD;&#xA;ssh.user.default.password=arduino&#xD;&#xA;ssh.host.wwwfiles.path=/www/sd&#xD;&#xA;build.working_directory={runtime.ide.path}&#xD;&#xA;ide.location.preferences.portable={runtime.ide.path}\portable&#xD;&#xA;ide.location.preferences=%VM_APPDATA_LOCAL%\Energia15\preferences.txt&#xD;&#xA;ide.location.preferences_fallback=%VM_APPDATA_ROAMING%\Energia15\preferences.txt&#xD;&#xA;ide.location.contributions=%VM_APPDATA_LOCAL%\Energia15&#xD;&#xA;ide.location.contributions_fallback=%VM_APPDATA_ROAMING%\Energia15&#xD;&#xA;ide.contributions.boards.allow=true&#xD;&#xA;ide.contributions.boards.ignore_unless_rewrite_found=true&#xD;&#xA;ide.contributions.libraries.allow=true&#xD;&#xA;ide.contributions.boards.support.urls.wiki=https://github.com/arduino/Arduino/wiki/Unofficial-list-of-3rd-party-boards-support-urls&#xD;&#xA;ide.packages.index.url=http://energia.nu/packages/package_index.json&#xD;&#xA;ide.appid=energia16x&#xD;&#xA;location.sketchbook=D:\Energia&#xD;&#xA;build.core.path=D:\Energia\hardware\energia\msp430\cores\msp430&#xD;&#xA;vm.core.include=arduino.h&#xD;&#xA;vm.boardsource.path=D:\Energia\hardware\energia\msp430&#xD;&#xA;runtime.platform.path=D:\Energia\hardware\energia\msp430&#xD;&#xA;vm.platformname.name=msp430&#xD;&#xA;build.arch=MSP430&#xD;&#xA;" visualmicro.application.name="energia16x" arduino.build.mcu="msp430g2553" arduino.upload.protocol="tilib" arduino.build.f_cpu="16000000L" arduino.board.desc="MSP-EXP430G2553LP" arduino.board.name="energia_MSP-EXP430G2553LP" arduino.upload.port="COM9" visualmicro.platform.name="msp430" arduino.build.core="msp430" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

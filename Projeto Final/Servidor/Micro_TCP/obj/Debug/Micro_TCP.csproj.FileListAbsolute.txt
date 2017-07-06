@@ -1,0 +1,6 @@
+c:\users\junio\onedrive\documentos\visual studio 2017\Projects\Micro_TCP\Micro_TCP\bin\Debug\Micro_TCP.exe.config
+c:\users\junio\onedrive\documentos\visual studio 2017\Projects\Micro_TCP\Micro_TCP\bin\Debug\Micro_TCP.exe
+c:\users\junio\onedrive\documentos\visual studio 2017\Projects\Micro_TCP\Micro_TCP\bin\Debug\Micro_TCP.pdb
+c:\users\junio\onedrive\documentos\visual studio 2017\Projects\Micro_TCP\Micro_TCP\obj\Debug\Micro_TCP.csprojResolveAssemblyReference.cache
+c:\users\junio\onedrive\documentos\visual studio 2017\Projects\Micro_TCP\Micro_TCP\obj\Debug\Micro_TCP.exe
+c:\users\junio\onedrive\documentos\visual studio 2017\Projects\Micro_TCP\Micro_TCP\obj\Debug\Micro_TCP.pdb
